@@ -33,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<bool> _isSelected = [false, true, false];
   List todos = List.empty();
   String title = "";
   String description = "";
@@ -76,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
             FirebaseFirestore.instance.collection("Einkaufsliste").snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return Text('Etwas ist schief gelaufen!');
           } else if (snapshot.hasData || snapshot.data != null) {
             return ListView.builder(
                 shrinkWrap: true,
@@ -130,20 +131,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 return AlertDialog(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  title: const Text("Add Todo"),
+                  title: const Text("Produkt hinzufügen"),
                   content: Container(
                     width: 400,
-                    height: 100,
+                    height: 300,
                     child: Column(
                       children: [
                         TextField(
+                          decoration: const InputDecoration(
+                            labelText: "Produkt",
+                          ),
                           onChanged: (String value) {
                             title = value;
                           },
                         ),
                         TextField(
+                          decoration: const InputDecoration(
+                            labelText: "Anzahl",
+                          ),
                           onChanged: (String value) {
                             description = value;
+                          },
+                        ),
+                        ToggleButtons(
+                          children: <Widget>[
+                            Icon(Icons.bluetooth),
+                            Icon(Icons.wifi),
+                            Icon(Icons.flash_on),
+                          ],
+                          isSelected: _isSelected,
+                          onPressed: (int index) {
+                            setState(() {
+                              _isSelected[index] = !_isSelected[index];
+                            });
                           },
                         ),
                       ],
