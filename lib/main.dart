@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(10)),
                   title: const Text("Produkt hinzufügen"),
                   content: Container(
-                    width: 400,
+                    width: 600,
                     height: 300,
                     child: Column(
                       children: [
@@ -153,18 +153,31 @@ class _MyHomePageState extends State<MyHomePage> {
                             description = value;
                           },
                         ),
-                        ToggleButtons(
-                          children: <Widget>[
-                            Icon(Icons.bluetooth),
-                            Icon(Icons.wifi),
-                            Icon(Icons.flash_on),
+                        //choose category
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RaisedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isSelected[0] = true;
+                                  _isSelected[1] = false;
+                                });
+                              },
+                              child: Text("Benötigt"),
+                              color: _isSelected[0] ? Colors.blue : null,
+                            ),
+                            RaisedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isSelected[0] = false;
+                                  _isSelected[1] = true;
+                                });
+                              },
+                              child: Text("Eingekauft"),
+                              color: _isSelected[1] ? Colors.blue : null,
+                            ),
                           ],
-                          isSelected: _isSelected,
-                          onPressed: (int index) {
-                            setState(() {
-                              _isSelected[index] = !_isSelected[index];
-                            });
-                          },
                         ),
                       ],
                     ),
