@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,7 +25,8 @@ class _productState extends State<product> {
 
     Map<String, String> todoList = {
       "todoTitle": title,
-      "todoDesc": description
+      "todoDesc": description,
+      "todoStatus": _isSelected[0].toString(), // true
     };
 
     documentReference
@@ -55,6 +58,7 @@ class _productState extends State<product> {
               description = value;
             },
           ),
+          const Spacer(flex: 1),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -80,13 +84,19 @@ class _productState extends State<product> {
               ),
             ],
           ),
-          RaisedButton(
-              onPressed: () {
-                createToDo();
-
-                Navigator.of(context).pop();
-              },
-              child: const Text("Hizufügen"))
+          const Spacer(flex: 12),
+          Column(
+            children: [
+              RaisedButton(
+                  onPressed: () {
+                    createToDo();
+                    Navigator.of(context).pop();
+                  },
+                  color: Colors.blue,
+                  child: const Text("Hinzufügen"))
+            ],
+          ),
+          const Spacer(flex: 1),
         ],
       ),
     );
