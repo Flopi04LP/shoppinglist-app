@@ -87,6 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               : ""),
                           trailing: Wrap(
                             children: <Widget>[
+                              const Text("Benötigt"),
+                              const Spacer(),
                               IconButton(
                                 icon: const Icon(Icons.edit),
                                 color: Colors.blue,
