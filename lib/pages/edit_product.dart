@@ -1,17 +1,27 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shoppinglist_app/main.dart';
 
-class product extends StatefulWidget {
+class edit_product extends StatefulWidget {
   @override
-  State<product> createState() => _productState();
+  State<edit_product> createState() => _edit_productState();
 }
 
-class _productState extends State<product> {
+class _edit_productState extends State<edit_product> {
   List<bool> _isSelected = [true, false];
+  late TextEditingController _controller;
+  late TextEditingController _controller2;
+
+  void initState() {
+    if (status_edit == "true") {
+      _isSelected = [true, false];
+    } else {
+      _isSelected = [false, true];
+    }
+    _controller = new TextEditingController(text: title_edit);
+    _controller2 = new TextEditingController(text: subtitle_edit);
+  }
 
   List todos = List.empty();
 
@@ -27,15 +37,15 @@ class _productState extends State<product> {
   }
 
   createToDo() {
-    DocumentReference documentReference =
-        FirebaseFirestore.instance.collection("Einkaufsliste").doc(title);
+    DocumentReference documentReference = FirebaseFirestore.instance
+        .collection("Einkaufsliste")
+        .doc(_controller.text);
 
     Map<String, String> todoList = {
-      "todoTitle": title,
-      "todoDesc": description,
+      "todoTitle": _controller.text,
+      "todoDesc": _controller2.text,
       "todoStatus": convert(_isSelected[0]),
     };
-
     documentReference
         .set(todoList)
         .whenComplete(() => print("Data stored successfully"));
@@ -50,6 +60,7 @@ class _productState extends State<product> {
       body: Column(
         children: [
           TextField(
+            controller: _controller,
             decoration: const InputDecoration(
               labelText: "Produkt",
             ),
@@ -58,6 +69,7 @@ class _productState extends State<product> {
             },
           ),
           TextField(
+            controller: _controller2,
             decoration: const InputDecoration(
               labelText: "Anzahl",
             ),

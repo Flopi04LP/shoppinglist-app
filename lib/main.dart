@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shoppinglist_app/pages/product.dart';
+import 'package:shoppinglist_app/pages/edit_product.dart';
+
+String title_edit = "";
+String subtitle_edit = "";
+String status_edit = "";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,10 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
   List todos = List.empty();
   String title = "";
   String description = "";
+  String status = "Benötigt";
   @override
   void initState() {
     super.initState();
-    todos = ["Hello", "Hey There"];
   }
 
   deleteTodo(item) {
@@ -87,15 +92,29 @@ class _MyHomePageState extends State<MyHomePage> {
                               : ""),
                           trailing: Wrap(
                             children: <Widget>[
-                              const Text("Benötigt"),
+                              Text((documentSnapshot != null)
+                                  ? ((documentSnapshot["todoStatus"] != null)
+                                      ? documentSnapshot["todoStatus"]
+                                      : "")
+                                  : ""),
                               const Spacer(),
                               IconButton(
                                 icon: const Icon(Icons.edit),
                                 color: Colors.blue,
                                 onPressed: () {
+                                  if (documentSnapshot != null) {
+                                    title_edit = documentSnapshot["todoTitle"];
+                                    subtitle_edit =
+                                        documentSnapshot["todoDesc"];
+                                    status_edit =
+                                        documentSnapshot["todoStatus"];
+                                    deleteTodo((documentSnapshot != null)
+                                        ? (documentSnapshot["todoTitle"])
+                                        : "");
+                                  }
                                   MaterialPageRoute materialPageRoute =
                                       MaterialPageRoute(
-                                    builder: (context) => product(),
+                                    builder: (context) => edit_product(),
                                   );
                                   Navigator.of(context).push(materialPageRoute);
                                 },
