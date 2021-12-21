@@ -55,6 +55,16 @@ class _edit_productState extends State<edit_product> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            createToDo();
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyApp()),
+            );
+          },
+        ),
         title: const Text('Produkt'),
       ),
       body: Column(

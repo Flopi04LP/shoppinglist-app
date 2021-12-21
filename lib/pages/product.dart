@@ -77,7 +77,7 @@ class _productState extends State<product> {
                   });
                 },
                 child: const Text("Benötigt"),
-                color: _isSelected[0] ? Colors.blue : null,
+                color: _isSelected[0] ? Colors.red : null,
               ),
               RaisedButton(
                 onPressed: () {
@@ -87,7 +87,7 @@ class _productState extends State<product> {
                   });
                 },
                 child: const Text("Eingekauft"),
-                color: _isSelected[1] ? Colors.blue : null,
+                color: _isSelected[1] ? Colors.green : null,
               ),
             ],
           ),
