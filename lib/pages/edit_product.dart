@@ -13,8 +13,9 @@ class _edit_productState extends State<edit_product> {
   late TextEditingController _controller;
   late TextEditingController _controller2;
 
+  @override
   void initState() {
-    if (status_edit == "true") {
+    if (status_edit == "false") {
       _isSelected = [true, false];
     } else {
       _isSelected = [false, true];
@@ -122,7 +123,7 @@ class _edit_productState extends State<edit_product> {
                     Navigator.of(context).pop();
                   },
                   color: Colors.blue,
-                  child: const Text("Hinzufügen"))
+                  child: const Text("Ändern"))
             ],
           ),
           const Spacer(flex: 1),
