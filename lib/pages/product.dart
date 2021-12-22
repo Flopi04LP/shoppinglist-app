@@ -45,7 +45,7 @@ class _productState extends State<product> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Produkt'),
+        title: const Text('Produkt hinzufügen'),
       ),
       body: Column(
         children: [

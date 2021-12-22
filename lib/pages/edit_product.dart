@@ -65,7 +65,7 @@ class _edit_productState extends State<edit_product> {
             );
           },
         ),
-        title: const Text('Produkt'),
+        title: const Text('Produkt ändern'),
       ),
       body: Column(
         children: [
