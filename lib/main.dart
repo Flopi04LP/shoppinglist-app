@@ -79,8 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       snapshot.data?.docs[index];
                   return Dismissible(
                       key: Key(index.toString()),
+                      //media qu
                       child: Card(
                         elevation: 4,
+                        margin: const EdgeInsets.all(8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
                         child: ListTile(
                           title: Text((documentSnapshot != null)
                               ? (documentSnapshot["todoTitle"])

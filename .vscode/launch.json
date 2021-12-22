@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "shoppinglist-app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "shoppinglist-app (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        }
+    ]
+}
